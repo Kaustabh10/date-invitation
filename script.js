@@ -5,7 +5,7 @@ let yesSize = 1;
 const maxSize = 1.6; // limit for button growth
 
 
-noBtn.addEventListener("mouseover", () => {
+function moveNoButton() {
 
     const buttonWidth = noBtn.offsetWidth;
     const buttonHeight = noBtn.offsetHeight;
@@ -20,14 +20,20 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-
     // grow yes button but only until limit
-    if(yesSize < maxSize){
+    if (yesSize < maxSize) {
         yesSize += 0.1;
         yesBtn.style.transform = `scale(${yesSize}) translateX(-15px)`;
     }
+}
 
-});
+
+// desktop hover
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// mobile touch
+noBtn.addEventListener("touchstart", moveNoButton);
+
 
 
 yesBtn.onclick = () => {
@@ -42,23 +48,24 @@ yesBtn.onclick = () => {
 };
 
 
-function createHearts(){
 
-    for(let i=0;i<25;i++){
+function createHearts() {
+
+    for (let i = 0; i < 25; i++) {
 
         const heart = document.createElement("div");
         heart.classList.add("heart");
 
         heart.innerHTML = "❤️";
 
-        heart.style.left = Math.random()*100 + "vw";
-        heart.style.top = Math.random()*100 + "vh";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
 
         document.body.appendChild(heart);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             heart.remove();
-        },2000);
+        }, 2000);
 
     }
 
